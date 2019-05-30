@@ -5,21 +5,22 @@ export default context => {
   return new Promise((resolve, reject) => {
     const { app, store, router, App } = initVue();
     let components = App.components;
-    let asyncDataPromiseFns = [];
+    // let asyncDataPromiseFns = [];
   
     Object.values(components).forEach(component => {
       if (component.asyncData) {
-        asyncDataPromiseFns.push(component.asyncData({ store }));
+        component.asyncData({ store });
+        // asyncDataPromiseFns.push();
       }
     });
 
-    Promise.all(asyncDataPromiseFns).then((result) => {
-      context.state = store.state;
-      resolve(app);
-    }, reject).catch((err)=>{
-        console.log("error~~~~~~~~~~~~~");
-        console.log(err);
-    });
+    // Promise.all(asyncDataPromiseFns).then((result) => {
+    //   context.state = store.state;
+    // }, reject).catch((err)=>{
+    //     console.log("error~~~~~~~~~~~~~");
+    //     console.log(err);
+    // });
+    resolve(app);
   });
 }
   
